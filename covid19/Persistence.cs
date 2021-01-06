@@ -12,6 +12,8 @@ namespace covid19
     class Persistence
     {
 
+
+
         // Grab the connection string from App.fig
         // Make sure the connection string name is the same with App.Config
 
