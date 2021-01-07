@@ -11,22 +11,26 @@ namespace covid19
         private int idCitoyen;
         private String nom;
         private String adresse;
-        private String couleur;
-        private String statutCitoyen;
-        private String etatHospitalier;
+        private String couleur; // Orang - Green - Red
+        private String statutCitoyen; // Recovered - Died - Sick
+        private String etatCitoyen; // Hospitaliser - Confiner
+        private String etatHospitalier; // Reanimation - Intubation
         private String traitement;
-        private String etatVaccination;
+        private String etatVaccination; // Stable - Contagieux
+        private String profilePatient; // Ager - Maladie chronique
 
-        public Citoyen(int idCitoyen, String nom, String adresse, String couleur, String statutCitoyen, String etatHospitalier, String etatVaccination, String traitement)
+        public Citoyen(int idCitoyen, String nom, String adresse, String couleur, String statutCitoyen, String etatCitoyen, String etatHospitalier, String etatVaccination, String traitement, String profilePatient)
         {
             this.idCitoyen = idCitoyen;
             this.nom = nom;
             this.adresse = adresse;
             this.couleur = couleur;
             this.statutCitoyen = statutCitoyen;
+            this.etatCitoyen = etatCitoyen;
             this.etatHospitalier = etatHospitalier;
             this.etatVaccination = etatVaccination;
             this.traitement = traitement;
+            this.profilePatient = profilePatient;
         }
 
         public void setIdCitoyen(int idCitoyen)
@@ -54,6 +58,11 @@ namespace covid19
             this.statutCitoyen = statutCitoyen;
         }
 
+        public void setEtatCitoyen(String etatCitoyen)
+        {
+            this.etatCitoyen = etatCitoyen;
+        }
+
         public void setEtatHospitalier(String etatHospitalier)
         {
             this.etatHospitalier = etatHospitalier;
@@ -68,7 +77,12 @@ namespace covid19
         {
             this.etatVaccination = etatVaccination;
         }
-    
+
+        public void setProfilePatient(String profilePatient)
+        {
+            this.profilePatient = profilePatient;
+        }
+
         public int getId()
         {
             return idCitoyen;
@@ -94,6 +108,11 @@ namespace covid19
             return statutCitoyen;
         }
 
+        public String getEtatCitoyen()
+        {
+            return etatCitoyen;
+        }
+
         public String getEtatHospitalier()
         {
             return etatHospitalier;
@@ -108,7 +127,12 @@ namespace covid19
         {
             return etatVaccination;
         }
-    
+
+        public String getProfilePatient()
+        {
+            return profilePatient;
+        }
+
         public int Test()
         {
             Random resultat = new Random();

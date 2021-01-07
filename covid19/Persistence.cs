@@ -11,9 +11,6 @@ namespace covid19
 {
     class Persistence
     {
-
-
-
         // Grab the connection string from App.fig
         // Make sure the connection string name is the same with App.Config
 
@@ -25,17 +22,13 @@ namespace covid19
         static SqlCommand cmd = new SqlCommand();
         static SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
-        //String couleur, String statutCitoyen, String etatHospitalier, String etatVaccination, String traitement
-        Citoyen citoyen = new Citoyen(5, "Adam", "Sale", "Green", "Stable", "Null", "Null", "Null");
-
-        //cmd.CommandText = "SELECT * FROM Login WHERE ID_Login = '" + comboBox1.Text + "' ";
-
         public void AfficheCitoyen(){
             cnx.Open();
             chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
             cmd.CommandText = "SELECT * FROM Citoyen";
+            cmd.ExecuteNonQuery();
             DataTable tbl = new DataTable();
-            adapter.Fill(tbl);
+            adapter.Fill(tbl); // Error
             Console.WriteLine(tbl.Rows.Count);
             foreach (DataRow dataRow in tbl.Rows)
             {
@@ -47,11 +40,13 @@ namespace covid19
             cnx.Close();
         }
 
-        public void AjouterCitoyen(int idCitoyen)
+        public void AjouterCitoyen(int idCitoyen, String nom, String adresse, String couleur, String statutCitoyen, String etatCitoyen, String etatHospitalier, String etatVaccination, String traitement, String profilePatient)
         {
             cnx.Open();
             chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
-            cmd.CommandText = "Delete Citoyen FROM Citoyen WHERE ID_Citoyen = '" + idCitoyen + "'";
+            cmd.CommandText = "INSERT INTO Citoyen(IdCitoyen, Nom, Adresse, Couleur, StatutCitoyen, EtatCitoyen, EtatHospitalier, EtatVaccination, Traitement, ProfilePatient) " +
+                 " VALUES('" + idCitoyen + "', '" + nom + "', '" + adresse + "', '" + couleur + "', '" + statutCitoyen + "', '" + etatCitoyen + "', '" + etatHospitalier + "', '" + etatVaccination + "', '" + traitement + "', '" + profilePatient + "')";
+            cmd.ExecuteNonQuery();
             cnx.Close();
         }
 
@@ -59,7 +54,8 @@ namespace covid19
         {
             cnx.Open();
             chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
-            cmd.CommandText = "UPDATE Login SET Nom = '" + nom + "',  WHERE ID_Login = '" + idCitoyen + "'";;
+            cmd.CommandText = "UPDATE Citoyen SET Nom = '" + nom + "',  WHERE IdCitoyen= " + idCitoyen + "";
+            cmd.ExecuteNonQuery();
             cnx.Close();
         }
 
@@ -67,60 +63,53 @@ namespace covid19
         {
             cnx.Open();
             chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
-            cmd.CommandText = "DELET Citoyen FROM Citoyen WHERE ID_Citoyen = '" + idCitoyen + "'";
+            cmd.CommandText = "DELET FROM Citoyen WHERE IdCitoyen = " + idCitoyen + "";
+            cmd.ExecuteNonQuery();
             cnx.Close();
         }
 
-        public void ChangeColor(int idCitoyen, int resultatTest)
+        public void ChangeColor(int idCitoyen, String color)
         {
             cnx.Open();
             chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
-
-            if (resultatTest == 0)
-                cmd.CommandText = "UPDATE Citoyen SET Couleur = 'Green'  WHERE ID_Citoyen = '" + idCitoyen + "'";
-
-            if (resultatTest == 1)
-                cmd.CommandText = "UPDATE Citoyen SET Couleur = 'Red'  WHERE ID_Citoyen = '" + idCitoyen + "'";
-
+            cmd.CommandText = "UPDATE Citoyen SET Couleur = '" + color + "' WHERE IdCitoyen = " + idCitoyen + "";
+            cmd.ExecuteNonQuery();
             cnx.Close();
         }
 
-        public void ChangeStatutCitoyen(int idCitoyen, int resultatControl)
+        public void ChangeStatutCitoyen(int idCitoyen, String statutCitoyen)
         {
             cnx.Open();
             chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
-
-            if (resultatControl == 0)
-                cmd.CommandText = "UPDATE Citoyen SET statutCitoyen = 'Recovered'  WHERE ID_Citoyen = '" + idCitoyen + "'";
-
-            if (resultatControl == 1)
-                cmd.CommandText = "UPDATE Citoyen SET statutCitoyen = 'Died'  WHERE ID_Citoyen = '" + idCitoyen + "'";
-
-            if (resultatControl == 2)
-                cmd.CommandText = "UPDATE Citoyen SET statutCitoyen = 'Sick'  WHERE ID_Citoyen = '" + idCitoyen + "'";
-
+            cmd.CommandText = "UPDATE Citoyen SET statutCitoyen = '" + statutCitoyen  + "'  WHERE IdCitoyen = " + idCitoyen + "";
+            cmd.ExecuteNonQuery();
             cnx.Close();
         }
 
-        public void ChangeEtatCitoyen(int idCitoyen, int degree)
+        public void ChangeEtatCitoyen(int idCitoyen, String etatCitoyen)
         {
             cnx.Open();
             chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
-
-            if (degree == 0)
-                cmd.CommandText = "UPDATE Citoyen SET EtatCitoyen = 'Hospitaliser'  WHERE ID_Citoyen = '" + idCitoyen + "'";
-
-            if (degree == 1)
-                cmd.CommandText = "UPDATE Citoyen SET EtatCitoyen = 'Confiner'  WHERE ID_Citoyen = '" + idCitoyen + "'";
-
+            cmd.CommandText = "UPDATE Citoyen SET EtatCitoyen = '" + etatCitoyen + "'  WHERE IdCitoyen = " + idCitoyen + "";
+            cmd.ExecuteNonQuery();
             cnx.Close();
         }
 
-        public void ChangeEtatVaccination(int idCitoyen)
+        public void ChangeEtatHospitalier(int idCitoyen, String etatHospitalier)
         {
             cnx.Open();
             chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
-            cmd.CommandText = "UPDATE Login SET EtatVaccination = '' WHERE ID_Login = '" + idCitoyen + "'"; ;
+            cmd.CommandText = "UPDATE Citoyen SET EtatHospitalier = '" + etatHospitalier + "'  WHERE IdCitoyen = " + idCitoyen + "";
+            cmd.ExecuteNonQuery();
+            cnx.Close();
+        }
+
+        public void ChangeEtatVaccination(int idCitoyen, String etatVaccination)
+        {
+            cnx.Open();
+            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.CommandText = "UPDATE Citoyen SET EtatVaccination = '" + etatVaccination + "' WHERE IdCitoyen = " + idCitoyen + "";
+            cmd.ExecuteNonQuery();
             cnx.Close();
         }
     }
