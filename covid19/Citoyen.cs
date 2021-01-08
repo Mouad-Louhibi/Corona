@@ -135,18 +135,31 @@ namespace covid19
 
         public int Test()
         {
+            /*
+             * 0 = Negative
+             * 1 = Positive
+             */
             Random resultat = new Random();
             return resultat.Next(2);
         }
 
         public int Control()
         {
+            /*
+             * 0 = normal
+             * 1 = Reanimation
+             * 2 = Intubation
+             */
             Random resultat = new Random();
             return resultat.Next(3);
         }
 
         public int Degree()
         {
+            /*
+             * 0 = Degree < 41
+             * 1 = Degree > 41
+             */
             Random resultat = new Random();
             return resultat.Next(2);
         }
