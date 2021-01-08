@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
 
@@ -24,7 +23,7 @@ namespace covid19
 
         public void AfficheAllCitoyen(){
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "SELECT * FROM Citoyen";
             cmd.ExecuteNonQuery();
             DataTable tbl = new DataTable();
@@ -43,7 +42,7 @@ namespace covid19
         public void AfficheCitoyen(int idCitoyen)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "SELECT FROM Citoyen WHERE IdCitoyen = " + idCitoyen  + "";
             cmd.ExecuteNonQuery();
             DataTable tbl = new DataTable();
@@ -62,7 +61,7 @@ namespace covid19
         public void AjouterCitoyen(int idCitoyen, String nom, String adresse, String couleur, String statutCitoyen, String etatCitoyen, String etatHospitalier, String etatVaccination, String traitement, String profilePatient)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "INSERT INTO Citoyen(IdCitoyen, Nom, Adresse, Couleur, StatutCitoyen, EtatCitoyen, EtatHospitalier, EtatVaccination, Traitement, ProfilePatient) " +
                  " VALUES('" + idCitoyen + "', '" + nom + "', '" + adresse + "', '" + couleur + "', '" + statutCitoyen + "', '" + etatCitoyen + "', '" + etatHospitalier + "', '" + etatVaccination + "', '" + traitement + "', '" + profilePatient + "')";
             cmd.ExecuteNonQuery();
@@ -72,7 +71,7 @@ namespace covid19
         public void ModifierCitoyen(int idCitoyen, String nom)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "UPDATE Citoyen SET Nom = '" + nom + "',  WHERE IdCitoyen= " + idCitoyen + "";
             cmd.ExecuteNonQuery();
             cnx.Close();
@@ -81,7 +80,7 @@ namespace covid19
         public void SupprimerCitoyen(int idCitoyen)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "DELET FROM Citoyen WHERE IdCitoyen = " + idCitoyen + "";
             cmd.ExecuteNonQuery();
             cnx.Close();
@@ -90,7 +89,7 @@ namespace covid19
         public void ChangeColor(int idCitoyen, String color)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "UPDATE Citoyen SET Couleur = '" + color + "' WHERE IdCitoyen = " + idCitoyen + "";
             cmd.ExecuteNonQuery();
             cnx.Close();
@@ -99,7 +98,7 @@ namespace covid19
         public void ChangeStatutCitoyen(int idCitoyen, String statutCitoyen)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "UPDATE Citoyen SET statutCitoyen = '" + statutCitoyen  + "'  WHERE IdCitoyen = " + idCitoyen + "";
             cmd.ExecuteNonQuery();
             cnx.Close();
@@ -108,7 +107,7 @@ namespace covid19
         public void ChangeEtatCitoyen(int idCitoyen, String etatCitoyen)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "UPDATE Citoyen SET EtatCitoyen = '" + etatCitoyen + "'  WHERE IdCitoyen = " + idCitoyen + "";
             cmd.ExecuteNonQuery();
             cnx.Close();
@@ -117,7 +116,7 @@ namespace covid19
         public void ChangeEtatHospitalier(int idCitoyen, String etatHospitalier)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "UPDATE Citoyen SET EtatHospitalier = '" + etatHospitalier + "'  WHERE IdCitoyen = " + idCitoyen + "";
             cmd.ExecuteNonQuery();
             cnx.Close();
@@ -126,7 +125,7 @@ namespace covid19
         public void ChangeEtatVaccination(int idCitoyen, String etatVaccination)
         {
             cnx.Open();
-            chaine = ConfigurationManager.ConnectionStrings["covid19"].ConnectionString;
+            cmd.Connection = cnx;
             cmd.CommandText = "UPDATE Citoyen SET EtatVaccination = '" + etatVaccination + "' WHERE IdCitoyen = " + idCitoyen + "";
             cmd.ExecuteNonQuery();
             cnx.Close();
