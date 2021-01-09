@@ -16,7 +16,7 @@ namespace covid19
         static SqlConnection SQLserverConnection = new SqlConnection();
         static SqlDataAdapter SQLserverAdapter = new SqlDataAdapter();
 
-        static string chaine = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Program Files (x86)\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\Covid19.mdf;Integrated Security = True;Connect Timeout = 30";
+        static string chaine = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename= C:\Users\mouad\OneDrive\Documents\covid19.mdf;Integrated Security = True;Connect Timeout = 30";
         static SqlConnection cnx = new SqlConnection(chaine);
         static SqlCommand cmd = new SqlCommand();
         static SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -81,7 +81,7 @@ namespace covid19
         {
             cnx.Open();
             cmd.Connection = cnx;
-            cmd.CommandText = "DELET FROM Citoyen WHERE IdCitoyen = " + idCitoyen + "";
+            cmd.CommandText = "DELETE FROM Citoyen WHERE IdCitoyen = " + idCitoyen + "";
             cmd.ExecuteNonQuery();
             cnx.Close();
         }

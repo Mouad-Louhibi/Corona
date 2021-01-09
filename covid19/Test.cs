@@ -12,6 +12,11 @@ namespace covid19
         private int resultatTest;
         private String decisionTest;
 
+        public Test()
+        {
+
+        }
+
         public Test(int idTest, int resultatTest, String decisionTest)
         {
             this.idTest = idTest;
@@ -47,6 +52,52 @@ namespace covid19
         public String getDecisionTest()
         {
             return decisionTest;
+        }
+
+        private int PassTest()
+        {
+            /*
+             * 0 = Negative
+             * 1 = Positive
+             */
+            Random resultat = new Random();
+            return resultat.Next(2);
+        }
+
+        private String DegreeTest()
+        {
+            int resultat = PassTest();
+
+            if (resultat == 0)
+                // Degree < 41
+                return "Pas Grave";
+
+            // Positive
+            return "Grave";
+        }
+
+        public String PCR()
+        {
+            int resultat = PassTest();
+
+            if (resultat == 0)
+                // Negative
+                return "Green";
+
+            // Positive
+            return "Red";
+        }
+
+        public String DecisionTest()
+        {
+            String resultatTest = DegreeTest();
+
+            if (resultatTest == "Grave")
+                // Hospitaliser
+                return "Hospitaliser";
+
+            // Confiner
+            return "Confiner";
         }
     }
 }

@@ -11,6 +11,38 @@ namespace covid19
 {
     class Program
     {
+        static Persistence persistence = new Persistence();
+        static Test test = new Test();
+        static Control control = new Control();
+
+        public void Run(int idCitoyen)
+        {
+            String etatCitoyen;
+            String etatHospitalier = "Normal";
+            String decisionIntubation;
+
+            persistence.ChangeColor(idCitoyen, test.PCR());
+
+            persistence.ChangeEtatCitoyen(idCitoyen, etatCitoyen = test.DecisionTest());
+
+            if (etatCitoyen == "Hospitalier")
+                persistence.ChangeEtatHospitalier(idCitoyen, etatHospitalier = control.DecisionControl());
+
+            if (etatHospitalier == "Intubation")
+            {
+                decisionIntubation = control.Intubation();
+
+                if (decisionIntubation == "Died")
+                    persistence.ChangeStatutCitoyen(idCitoyen, decisionIntubation);
+
+                if (decisionIntubation == "Normal")
+                    persistence.ChangeEtatHospitalier(idCitoyen, "Normal");
+            }
+
+
+
+        }
+
         static void Main(string[] args)
         {
             /**************************************************   mainMenu   **************************************************/
@@ -22,13 +54,11 @@ namespace covid19
             String couleur; // Orang - Green - Red
             String statutCitoyen; // Recovered - Died - Sick
             String etatCitoyen; // Hospitaliser - Confiner
-            String etatHospitalier; // Reanimation - Intubation
+            String etatHospitalier; // Normal - Reanimation - Intubation
             String traitement;
             String etatVaccination; // Stable - Contagieux
             String profilePatient; // Ager - Maladie chronique
             */
-
-            Persistence persistence = new Persistence();
 
             Console.WriteLine("1- Afficher les Citoyens");
             Console.WriteLine("2- Afficher Citoyens");
@@ -39,6 +69,8 @@ namespace covid19
             Console.WriteLine("7- Change Etat Citoyen");
             Console.WriteLine("8- Change Etat Hospitalier");
             Console.WriteLine("9- Change Etat Vaccination");
+            Console.WriteLine("10- Ajouter Citoyen");
+            
 
             operation = Int32.Parse(Console.ReadLine());
 
@@ -150,6 +182,53 @@ namespace covid19
 
                 persistence.ChangeEtatVaccination(idCitoyen, etatVaccination);
             }
+
+            if (operation == 10)
+            {
+                int idCitoyen;
+                String nom;
+                String adresse;
+                String couleur; // Orang - Green - Red
+                String statutCitoyen; // Recovered - Died - Sick
+                String etatCitoyen; // Hospitaliser - Confiner
+                String etatHospitalier; // Reanimation - Intubation
+                String traitement;
+                String etatVaccination; // Stable - Contagieux
+                String profilePatient; // Ager - Maladie chronique
+
+                Console.WriteLine("ID: ");
+                idCitoyen = Int32.Parse(Console.ReadLine());
+
+                Console.WriteLine("Nom: ");
+                nom = Console.ReadLine();
+
+                Console.WriteLine("Adresse: ");
+                adresse = Console.ReadLine();
+
+                Console.WriteLine("Couleur: ");
+                couleur = Console.ReadLine();
+
+                Console.WriteLine("Statut: ");
+                statutCitoyen = Console.ReadLine();
+
+                Console.WriteLine("Etat: ");
+                etatCitoyen = Console.ReadLine();
+
+                Console.WriteLine("Etat Hospitalier: ");
+                etatHospitalier = Console.ReadLine();
+
+                Console.WriteLine("Traitement: ");
+                traitement = Console.ReadLine();
+
+                Console.WriteLine("Etat Vaccination: ");
+                etatVaccination = Console.ReadLine();
+
+                Console.WriteLine("Profile Patient: ");
+                profilePatient = Console.ReadLine();
+
+                persistence.AjouterCitoyen(idCitoyen, nom, adresse, couleur, statutCitoyen, etatCitoyen, etatHospitalier, etatVaccination, traitement, profilePatient);
+            }
         }
     }
 }
+
