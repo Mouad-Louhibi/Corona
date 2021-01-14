@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace covid19
+namespace Covid19
 {
     class Test
     {
@@ -24,6 +24,8 @@ namespace covid19
             this.decisionTest = decisionTest;
         }
 
+        /********** ********** ********** ********** ********** ********** Setters ********** ********** ********** ********** ********** **********/
+
         public void setIdTest(int idTest)
         {
             this.idTest = idTest;
@@ -38,6 +40,8 @@ namespace covid19
         {
             this.decisionTest = decisionTest;
         }
+
+        /********** ********** ********** ********** ********** ********** Getters ********** ********** ********** ********** ********** **********/
 
         public int getIdTest()
         {
@@ -54,50 +58,77 @@ namespace covid19
             return decisionTest;
         }
 
-        private int PassTest()
+        /********** ********** ********** ********** ********** ********** Functions ********** ********** ********** ********** ********** **********/
+        public String DegreeTest()
         {
-            /*
-             * 0 = Negative
-             * 1 = Positive
-             */
-            Random resultat = new Random();
-            return resultat.Next(2);
-        }
+            Random random = new Random();
+            int resultat;
+            resultat = random.Next(2);
 
-        private String DegreeTest()
-        {
-            int resultat = PassTest();
 
             if (resultat == 0)
                 // Degree < 41
-                return "Pas Grave";
+                return "Grave";
 
             // Positive
-            return "Grave";
+            return "PGrave";
         }
 
         public String PCR()
         {
-            int resultat = PassTest();
+            Random random = new Random();
+            int resultat;
+
+            resultat = random.Next(2);
 
             if (resultat == 0)
                 // Negative
-                return "Green";
+                return "Negative";
 
             // Positive
-            return "Red";
+            return "Positive";
         }
 
-        public String DecisionTest()
+        public String DecisionColor()
         {
-            String resultatTest = DegreeTest();
+            Random random = new Random();
+            int resultat;
 
-            if (resultatTest == "Grave")
+            resultat = random.Next(3);
+
+            if (resultat == 0)
+                // Orange
+                return "Orange";
+
+            if (resultat == 1)
+                // Red
+                return "Red";
+
+            // Green
+            return "Green";
+        }
+
+        public String DecisionEtat(String color)
+        {
+            if (color == "Orange")
+                // Confiner
+                return "Confiner";
+
+            if (color == "Red")
                 // Hospitaliser
                 return "Hospitaliser";
 
-            // Confiner
-            return "Confiner";
+            return "Normal";
+        }
+
+        public String Retest()
+        {
+            String resultat = DegreeTest();
+
+            if (resultat == "Pas Grave")
+                return "Confiner";
+
+            return "Hospitaliser";
         }
     }
 }

@@ -12,35 +12,89 @@ namespace covid19
     class Program
     {
         static Persistence persistence = new Persistence();
-        static Test test = new Test();
         static Control control = new Control();
 
         public void Run(int idCitoyen)
         {
-            String etatCitoyen;
+            // String color = "Grey";
+            String etatCitoyen = "Normal";
             String etatHospitalier = "Normal";
             String decisionIntubation;
+            
+            // persistence.ChangeColor(idCitoyen, color = test.DecisionColor());
 
-            persistence.ChangeColor(idCitoyen, test.PCR());
-
-            persistence.ChangeEtatCitoyen(idCitoyen, etatCitoyen = test.DecisionTest());
+            // persistence.ChangeEtatCitoyen(idCitoyen, etatCitoyen = test.DecisionEtat(color));
 
             if (etatCitoyen == "Hospitalier")
+            {
                 persistence.ChangeEtatHospitalier(idCitoyen, etatHospitalier = control.DecisionControl());
 
-            if (etatHospitalier == "Intubation")
-            {
-                decisionIntubation = control.Intubation();
+                // if (etatHospitalier == "Normal") persistence.ChangeEtatHospitalier(idCitoyen, etatHospitalier = control.DecisionControl());
+                // confinementTime.Start();
 
-                if (decisionIntubation == "Died")
-                    persistence.ChangeStatutCitoyen(idCitoyen, decisionIntubation);
 
-                if (decisionIntubation == "Normal")
-                    persistence.ChangeEtatHospitalier(idCitoyen, "Normal");
+                // if (etatHospitalier == "Reanimation") persistence.ChangeEtatHospitalier(idCitoyen, etatHospitalier = control.DecisionControl());
+                // countEtatHospitalier
+
+                if (etatHospitalier == "Intubation")
+                {
+                    decisionIntubation = control.Intubation();
+
+                    if (decisionIntubation == "Died")
+                        persistence.ChangeStatutCitoyen(idCitoyen, "Died");
+
+                    if (decisionIntubation == "Normal")
+                        persistence.ChangeEtatHospitalier(idCitoyen, "Normal");
+                }
             }
 
+            if (etatCitoyen == "Confiner")
+            {
+                //confinementTime.Start();
+            }
 
+            /*
+            MessageBox.Show(color = test.DecisionColor());
 
+            if (color == "Green")
+                MessageBox.Show("Color Changed to Green");
+            else
+            {
+                MessageBox.Show("Color Changed to " + color);
+
+                MessageBox.Show("etatCitoyen Changed to " + (etatCitoyen = test.DecisionEtat(color)));
+
+                if (etatCitoyen == "Hospitaliser")
+                {
+                    MessageBox.Show("etatHospitalier Changed to " + (etatHospitalier = control.DecisionControl()));
+
+                    if (etatHospitalier == "Normal")
+                    {
+
+                    }
+
+                    if (etatHospitalier == "Reanimation")
+                    {
+
+                    }
+
+                    if (etatHospitalier == "Intubation")
+                    {
+                        decisionIntubation = control.Intubation();
+
+                        if (decisionIntubation == "Died")
+                            MessageBox.Show("statutCitoyen Changed to Died");
+
+                        if (decisionIntubation == "Normal")
+                            MessageBox.Show("etatHospitalier Changed to Died");
+                    }
+                }
+
+                if (etatCitoyen == "Confiner")
+                {
+                    t.Start();
+                }
+            }*/
         }
 
         static void Main(string[] args)
