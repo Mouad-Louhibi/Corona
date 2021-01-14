@@ -26,9 +26,12 @@ namespace covid19
             cmd.Connection = cnx;
             cmd.CommandText = "SELECT * FROM Citoyen";
             cmd.ExecuteNonQuery();
+
             DataTable tbl = new DataTable();
             adapter.Fill(tbl); // Error
+
             Console.WriteLine(tbl.Rows.Count);
+
             foreach (DataRow dataRow in tbl.Rows)
             {
                 foreach (var item in dataRow.ItemArray)
