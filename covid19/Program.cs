@@ -53,20 +53,19 @@ namespace covid19
                 //confinementTime.Start();
             }
 
-            /*
-            MessageBox.Show(color = test.DecisionColor());
+            //MessageBox.Show(color = test.DecisionColor());
 
-            if (color == "Green")
-                MessageBox.Show("Color Changed to Green");
+            //if (color == "Green")
+            //MessageBox.Show("Color Changed to Green");
             else
             {
-                MessageBox.Show("Color Changed to " + color);
+                //MessageBox.Show("Color Changed to " + color);
 
-                MessageBox.Show("etatCitoyen Changed to " + (etatCitoyen = test.DecisionEtat(color)));
+                //MessageBox.Show("etatCitoyen Changed to " + (etatCitoyen = test.DecisionEtat(color)));
 
                 if (etatCitoyen == "Hospitaliser")
                 {
-                    MessageBox.Show("etatHospitalier Changed to " + (etatHospitalier = control.DecisionControl()));
+                    //MessageBox.Show("etatHospitalier Changed to " + (etatHospitalier = control.DecisionControl()));
 
                     if (etatHospitalier == "Normal")
                     {
@@ -83,18 +82,18 @@ namespace covid19
                         decisionIntubation = control.Intubation();
 
                         if (decisionIntubation == "Died")
-                            MessageBox.Show("statutCitoyen Changed to Died");
+                            //MessageBox.Show("statutCitoyen Changed to Died");
 
-                        if (decisionIntubation == "Normal")
-                            MessageBox.Show("etatHospitalier Changed to Died");
+                            if (decisionIntubation == "Normal") { }
+                        //MessageBox.Show("etatHospitalier Changed to Died");
                     }
                 }
 
                 if (etatCitoyen == "Confiner")
                 {
-                    t.Start();
+                    //t.Start();
                 }
-            }*/
+            }
         }
 
         static void Main(string[] args)
