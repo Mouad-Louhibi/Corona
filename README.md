@@ -8,6 +8,8 @@
 <img src="https://github.com/Mouad-Louhibi/Corona/blob/UI/Modifi.PNG">
 <img src="https://github.com/Mouad-Louhibi/Corona/blob/UI/Ajout.PNG">
 <img src="https://github.com/Mouad-Louhibi/Corona/blob/UI/Supprim.PNG">
+<img src="https://github.com/Mouad-Louhibi/Corona/blob/UI/covid19/Acceuil.PNG">
+
 
 
 
